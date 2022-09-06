@@ -147,6 +147,7 @@ void remTeam(string teamRem) {
     Team::teamsRemaining = temp;
 }
 
+// random team is selected to assign to fixtures
 string randTeam() {
     srand(time(NULL));
     int num = rand() % Team::teamsRemaining.size();
@@ -155,6 +156,7 @@ string randTeam() {
     return randTeam;
 }
 
+// winner is selected from the match
 string winner(string teamA, string teamB, int num) {
     vector<int> v{ 'w','l' };
     string winner;
