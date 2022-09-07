@@ -12,6 +12,7 @@ void final();
 void remTeam();
 string randTeam();
 string winner();
+void gameOver();
 
 class Team {
 public:
@@ -173,46 +174,103 @@ string winner(string teamA, string teamB, int num) {
     return winner;
 }
 
-void roundOf16() {
-    vector<string> winners; // push back the winners, then do teamremaining = winners
+int team1Goals;
+int team2Goals;
+int team3Goals;
+int team4Goals;
+int team5Goals;
+int team6Goals;
+int team7Goals;
+int team8Goals;
+int team9Goals;
+int team10Goals;
+int team11Goals;
+int team12Goals;
+int team13Goals;
+int team14Goals;
+int team15Goals;
+int team16Goals;
 
+void gameOver(string team1, string team2) {
+    int choice;
+
+    cout << "        You have been knocked out by " << team2 << " losing " << team1Goals << " - " << team2Goals << endl << endl;
+
+    m:
+    cout << "      Press 1 to PLAY AGAIN" << endl;
+    cout << "      Press 2 to EXIT" << endl;
+    cin >> choice;
+
+    if (choice == 1) {
+        system("cls");
+        Team t;
+        t.selectTeam();
+    }
+    else if (choice == 2) {
+        exit(0);
+    }
+    else {
+        goto m;
+    }
+
+}
+
+void roundOf16() {
+    vector<string> winners; 
+
+    cout << "        You have qualified for the Champions League knock-out stages" << endl << endl;
     cout << "        ROUND OF 16" << endl << endl;
 
+    // make selected team upper case
+    string upperName;
+    for (char c : Team::teamName) {
+        upperName += toupper(c);
+    }
+    Team::teamName = upperName;
+
     // setting up matches
+    // match 1
     string team1 = Team::teamName;
     string team2 = randTeam();
     remTeam(team2);
 
+    // match 2
     string team3 = randTeam();
     remTeam(team3);
     string team4 = randTeam();
     remTeam(team4);
 
+    // match 3
     string team5 = randTeam();
     remTeam(team5);
     string team6 = randTeam();
     remTeam(team6);
 
+    // match 4
     string team7 = randTeam();
     remTeam(team7);
     string team8 = randTeam();
     remTeam(team8);
 
+    // match 5
     string team9 = randTeam();
     remTeam(team9);
     string team10 = randTeam();
     remTeam(team10);
 
+    // match 6
     string team11 = randTeam();
     remTeam(team11);
     string team12 = randTeam();
     remTeam(team12);
-
+    
+    // match 7 
     string team13 = randTeam();
     remTeam(team13);
     string team14 = randTeam();
     remTeam(team14);
 
+    // match 8
     string team15 = randTeam();
     remTeam(team15);
     string team16 = randTeam();
@@ -251,32 +309,124 @@ void roundOf16() {
     
     Team::teamsRemaining = winners;
 
-    
+    if (winner(team1, team2, num1) == team1) {
+        team1Goals = rand() % 8 + 1;
+        team2Goals = rand() % team1Goals;
+    }
+    else {
+        team2Goals = rand() % 8 + 1;
+        team1Goals = rand() % team2Goals;
+    } 
 
-    for (auto t : Team::teamsRemaining) {
-        cout << t << endl;
+    if (winner(team3, team4, num2) == team3) {
+        team3Goals = rand() % 8 + 1;
+        team4Goals = rand() % team3Goals;
+    }
+    else {
+        team4Goals = rand() % 8 + 1;
+        team3Goals = rand() % team4Goals;
+    }
+
+    if (winner(team5, team6, num3) == team5) {
+        team5Goals = rand() % 8 + 1;
+        team6Goals = rand() % team5Goals;
+    }
+    else {
+        team6Goals = rand() % 8 + 1;
+        team5Goals = rand() % team6Goals;
+    }
+
+    if (winner(team7, team8, num4) == team7) {
+        team7Goals = rand() % 8 + 1;
+        team8Goals = rand() % team7Goals;
+    }
+    else {
+        team8Goals = rand() % 8 + 1;
+        team7Goals = rand() % team8Goals;
+    }
+
+    if (winner(team9, team10, num5) == team9) {
+        team9Goals = rand() % 8 + 1;
+        team10Goals = rand() % team9Goals;
+    }
+    else {
+        team10Goals = rand() % 8 + 1;
+        team9Goals = rand() % team10Goals;
+    }
+
+    if (winner(team11, team12, num6) == team11) {
+        team11Goals = rand() % 8 + 1;
+        team12Goals = rand() % team11Goals;
+    }
+    else {
+        team12Goals = rand() % 8 + 1;
+        team11Goals = rand() % team12Goals;
+    }
+
+    if (winner(team13, team14, num7) == team13) {
+        team13Goals = rand() % 8 + 1;
+        team14Goals = rand() % team13Goals;
+    }
+    else {
+        team14Goals = rand() % 8 + 1;
+        team13Goals = rand() % team14Goals;
+    }
+
+    if (winner(team15, team16, num8) == team15) {
+        team15Goals = rand() % 8 + 1;
+        team16Goals = rand() % team15Goals;
+    }
+    else {
+        team16Goals = rand() % 8 + 1;
+        team15Goals = rand() % team16Goals;
     }
     
+    int c;
+
+    x:
+    cout << endl;
+    cout << "    Press 1 to simulate results" << endl;
+    cout << "    Press 2 to start again" << endl;
+    cout << "    Press 3 to EXIT" << endl;
+    cin >> c;
+
+    if (c == 1) {
+        cout << "    " << team1 << " " << team1Goals << " - " << team2Goals << " " << team2 << endl;
+        cout << "    " << team3 << " " << team3Goals << " - " << team4Goals << " " << team4 << endl;
+        cout << "    " << team5 << " " << team5Goals << " - " << team6Goals << " " << team6 << endl;
+        cout << "    " << team7 << " " << team7Goals << " - " << team8Goals << " " << team8 << endl;
+        cout << "    " << team9 << " " << team9Goals << " - " << team10Goals << " " << team10 << endl;
+        cout << "    " << team11 << " " << team11Goals << " - " << team12Goals << " " << team12 << endl;
+        cout << "    " << team13 << " " << team13Goals << " - " << team14Goals << " " << team14 << endl;
+        cout << "    " << team15 << " " << team15Goals << " - " << team16Goals << " " << team16 << endl;
+
+        // game is over if you get knocked out
+        if (team1Goals < team2Goals) {
+            gameOver(team1, team2);
+        }
+        else {
+            quaterFinals();
+        }
+    }
+    else if (c == 2) {
+        system("cls");
+        Team t;
+        t.selectTeam();
+    } else if (c == 3) {
+        exit(0);
+    }
+    else {
+        goto x;
+    }
 
     
-
-    /*
-    team 1 = Team::teamName
-    team 2 = random team from array, then delete team
-    versusFunction(team1, team2)
-    team 3 = random team from array, then delete team
-    team 4 = random team from array, then delete team
-    versusFunction(team3, team4)
-    etc....
-
-    veruses function notes:
-    random score, returns winner, deletes loser from Team::teamsRemaining
-
-    if your team loses, back to start of the game
-    */
 }
-void quaterFinals() {
 
+
+void quaterFinals() {
+    cout << endl;
+    cout << "        You have qualified for the quater finals" << endl << endl;
+    cout << "        QUATER FINALS" << endl << endl;
 }
 void semiFinals() {
 
