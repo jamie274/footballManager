@@ -27,7 +27,8 @@ public:
     void selectTeam() {
         int choice;
 
-        cout << "        Welcome to Football Simulator" << endl << endl;
+        // user will select a team
+        cout << "        Welcome to The Champions League simulator" << endl << endl;
         cout << "    Select team: " << endl << endl;
         cout << "    Press 1 for Manchester United" << endl;
         cout << "    Press 2 for Manchester City" << endl;
@@ -120,6 +121,7 @@ public:
             goto m;
         }
 
+        // push all teams into teamsRemaining apart from the selected team
         for (auto team : allTeams) {
             if (team == teamName) {
             }
@@ -135,6 +137,7 @@ public:
 string Team::teamName;
 vector<string> Team::teamsRemaining;
 
+// remove selected team from vector
 void remTeam(string teamRem) {
     vector<string> temp;
 
@@ -191,6 +194,7 @@ int team14Goals;
 int team15Goals;
 int team16Goals;
 
+// this method is ran if the user loses a match 
 void gameOver(string team1, string team2) {
     int choice;
 
@@ -213,7 +217,6 @@ void gameOver(string team1, string team2) {
     else {
         goto m;
     }
-
 }
 
 void roundOf16() {
@@ -236,8 +239,8 @@ void roundOf16() {
     remTeam(team2);
 
     // match 2
-    string team3 = randTeam();
-    remTeam(team3);
+    string team3 = randTeam(); // random team is selected 
+    remTeam(team3); // selected team is removed from vector
     string team4 = randTeam();
     remTeam(team4);
 
@@ -290,6 +293,7 @@ void roundOf16() {
     vector<int> v{ 'w','l' };
     srand(time(NULL));
 
+    // random number is generated to produce a random result (w or l)
     int num1 = rand() % v.size();
     int num2 = rand() % v.size();
     int num3 = rand() % v.size();
@@ -299,12 +303,14 @@ void roundOf16() {
     int num7 = rand() % v.size();
     int num8 = rand() % v.size();
 
+    // if user wins, they are not pushed into the vector (can't have them playing themselves e.g. PSG vs PSG)
     if (winner(team1, team2, num1) == team1 ) {
     }
     else {
         winners.push_back(winner(team1, team2, num1));
     }
     
+    // winners are pushed back
     winners.push_back(winner(team3, team4,num2));
     winners.push_back(winner(team5, team6,num3));
     winners.push_back(winner(team7, team8,num4));
@@ -315,6 +321,7 @@ void roundOf16() {
     
     Team::teamsRemaining = winners;
 
+    // random number of goals scored per team depending on who won/loss
     if (winner(team1, team2, num1) == team1) {
         team1Goals = rand() % 8 + 1;
         team2Goals = rand() % team1Goals;
@@ -735,12 +742,6 @@ void final() {
     else {
         goto x;
     }
-
-}
-
-
-void result(string team1, string team2) {
-
 }
 
 int main() {
